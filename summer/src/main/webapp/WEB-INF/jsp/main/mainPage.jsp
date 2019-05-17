@@ -11,11 +11,46 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+	$("#create").on("click", function(){
+		$.ajax({
+	        type : "POST"
+	        , url : "/summer/create/createPage.do"
+	        , data : { }
+	        , success : function() {}
+	        , error : function(e) {
+	        	console.log(e.result);
+	        }
+	    });
+	});
+	$("#view").on("click", function(){
+		$.ajax({
+	        type : "POST"
+	        , url : "/summer/list/listPage.do"
+	        , data : { }
+	        , success : function() {}
+	        , error : function(e) {
+	        	console.log(e.result);
+	        }
+	    });
+	});
+	$("#alarm").on("click", function(){
+		$.ajax({
+	        type : "POST"
+	        , url : "/summer/alarm/alarmPage.do"
+	        , data : { }
+	        , success : function() {}
+	        , error : function(e) {
+	        	console.log(e.result);
+	        }
+	    });
+	});
 });
 
 </script>
-<div>
-
+<div class='main_div'>
+	<input type='button' class='main_button' id='create' value='TODO 생성'>
+	<input type='button' class='main_button' id='view' value='TODO 리스트 보기'>
+	<input type='button' class='main_button' id='alarm' value='마감된 TODO'>
 </div>
 </body>
 </html>
