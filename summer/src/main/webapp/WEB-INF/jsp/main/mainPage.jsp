@@ -12,41 +12,26 @@
 
 $(document).ready(function(){
 	$("#create").on("click", function(){
-		$.ajax({
-	        type : "POST"
-	        , url : "/summer/create/createPage.do"
-	        , data : { }
-	        , success : function() {}
-	        , error : function(e) {
-	        	console.log(e.result);
-	        }
-	    });
+		var form = $("#send_mode");
+		form.attr('action', "/summer/create/createPage.do");
+		form.submit();
 	});
+	
 	$("#view").on("click", function(){
-		$.ajax({
-	        type : "POST"
-	        , url : "/summer/list/listPage.do"
-	        , data : { }
-	        , success : function() {}
-	        , error : function(e) {
-	        	console.log(e.result);
-	        }
-	    });
+		var form = $("#send_mode");
+		form.attr('action', "/summer/view/viewPage.do");
+		form.submit();
 	});
+	
 	$("#alarm").on("click", function(){
-		$.ajax({
-	        type : "POST"
-	        , url : "/summer/alarm/alarmPage.do"
-	        , data : { }
-	        , success : function() {}
-	        , error : function(e) {
-	        	console.log(e.result);
-	        }
-	    });
+		var form = $("#send_mode");
+		form.attr('action', "/summer/alarm/alarmPage.do");
+		form.submit();
 	});
 });
-
 </script>
+<form id="send_form">
+</form>
 <div class='main_div'>
 	<input type='button' class='main_button' id='create' value='TODO 생성'>
 	<input type='button' class='main_button' id='view' value='TODO 리스트 보기'>
