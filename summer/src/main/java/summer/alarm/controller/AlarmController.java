@@ -21,13 +21,8 @@ public class AlarmController {
 	private AlarmService alarmService;
 	
  	@RequestMapping(value = "/alarm/alarmPage.do")
-	public ResponseEntity<ModelAndView> alarmPage(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		try {
-			ModelAndView mv = new ModelAndView("alarm/alarmPage");
-			return new ResponseEntity<ModelAndView>(mv, HttpStatus.OK);
-		}
-		catch(Exception e) {
-			return new ResponseEntity<ModelAndView>(HttpStatus.BAD_REQUEST);
-		}
+	public ModelAndView alarmPage(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		ModelAndView mv = new ModelAndView("alarm/alarmPage");
+		return mv;
 	}
 }

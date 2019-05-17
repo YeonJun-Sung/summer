@@ -23,13 +23,8 @@ public class ListController {
 	private ListService listService;
 	
  	@RequestMapping(value = "/list/listPage.do")
-	public ResponseEntity<ModelAndView> listPage(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		try {
-			ModelAndView mv = new ModelAndView("list/listPage");
-			return new ResponseEntity<ModelAndView>(mv, HttpStatus.OK);
-		}
-		catch(Exception e) {
-			return new ResponseEntity<ModelAndView>(HttpStatus.BAD_REQUEST);
-		}
+	public ModelAndView listPage(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		ModelAndView mv = new ModelAndView("list/listPage");
+		return mv;
 	}
 }

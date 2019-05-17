@@ -21,13 +21,8 @@ public class CreateController {
 	private CreateService createService;
 	
  	@RequestMapping(value = "/create/createPage.do")
-	public ResponseEntity<ModelAndView> createPage(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		try {
-			ModelAndView mv = new ModelAndView("create/createPage");
-			return new ResponseEntity<ModelAndView>(mv, HttpStatus.OK);
-		}
-		catch(Exception e) {
-			return new ResponseEntity<ModelAndView>(HttpStatus.BAD_REQUEST);
-		}
+	public ModelAndView createPage(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		ModelAndView mv = new ModelAndView("create/createPage");
+		return mv;
 	}
 }

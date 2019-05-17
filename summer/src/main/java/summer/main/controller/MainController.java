@@ -21,13 +21,8 @@ public class MainController {
 	private MainService mainService;
 	
  	@RequestMapping(value = "/main/mainPage.do")
-	public ResponseEntity<ModelAndView> mainPage(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		try {
-			ModelAndView mv = new ModelAndView("main/mainPage");
-			return new ResponseEntity<ModelAndView>(mv, HttpStatus.OK);
-		}
-		catch(Exception e) {
-			return new ResponseEntity<ModelAndView>(HttpStatus.BAD_REQUEST);
-		}
+	public ModelAndView mainPage(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		ModelAndView mv = new ModelAndView("main/mainPage");
+		return mv;
 	}
 }
