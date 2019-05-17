@@ -17,16 +17,16 @@
 	<insert id="saveTodoPriority" parameterType="hashMap">
 		INSERT INTO list_priority	(list_key
 		<if test='priority != null and !priority.equals("")'>, list_pri</if>)
-		VALUES (#{key}
+		VALUES (#{list_key}
 		<if test='priority != null and !priority.equals("")'>, ${priority}</if>)
     </insert>
 	
 	<insert id="saveTodoStatus" parameterType="hashMap">
 		INSERT INTO list_status	(list_key
 		<if test='date != null and !date.equals("")'>, list_date</if>, list_stat)
-		VALUES (#{key}
+		VALUES (#{list_key}
 		<if test='date != null and !date.equals("")'>, #{date}</if>
-		<if test='priority != null or !priority.equals("")'>, '1')</if>
+		<if test='priority != null and !priority.equals("")'>, '1')</if>
 		<if test='priority == null or priority.equals("")'>, '2')</if>
     </insert>
 </mapper>

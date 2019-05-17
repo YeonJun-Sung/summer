@@ -12,18 +12,18 @@ public class CreateRestDAO extends AbstractDAO {
 
 	public String saveTodo(Map<String, Object> param) {
 		// TODO Auto-generated method stub
-		insert("crateRest.saveTodo", param);
+		insert("createRest.saveTodo", param);
 		String key = (String) param.get("list_key");
 		return key;
 	}
 
 	public void saveTodoPriority(Map<String, Object> param) {
 		// TODO Auto-generated method stub
-		insert("crateRest.saveTodoPriority", param);
+		insert("createRest.saveTodoPriority", param);
 	}
 
 	public void saveTodoStatus(Map<String, Object> param) {
 		// TODO Auto-generated method stub
-		insert("crateRest.saveTodoStatus", param);
+		insert("createRest.saveTodoStatus", param);
 	}
 }

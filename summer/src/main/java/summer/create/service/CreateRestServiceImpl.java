@@ -20,7 +20,6 @@ public class CreateRestServiceImpl implements CreateRestService {
 	public void saveTodo(Map<String, Object> param) throws Exception {
 		// TODO Auto-generated method stub
 		String key = createRestDAO.saveTodo(param);
-		param.put("list_key", key);
 		createRestDAO.saveTodoPriority(param);
 		createRestDAO.saveTodoStatus(param);
 	}
