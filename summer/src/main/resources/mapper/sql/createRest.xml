@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="createRest">
+	<insert id="saveTodo" parameterType="hashmap">
+		INSERT INTO list_contents
+		(list_key, list_subject, list_content)
+		VALUES (uuid(), #{subject}, #{contents})
+		<selectKey keyProperty="list_key" resultType="String" order="AFTER">
+		SELECT list_key
+		FROM list_contents
+		ORDER BY seq DESC
+		limit 1;
+		</selectKey>
+	</insert>
+	
+	<insert id="saveTodoPriority" parameterType="hashMap">
+		INSERT INTO list_priority	(list_key
+		<if test='priority != null and !priority.equals("")'>, list_pri</if>)
+		VALUES (#{key}
+		<if test='priority != null and !priority.equals("")'>, ${priority}</if>)
+    </insert>
+	
+	<insert id="saveTodoStatus" parameterType="hashMap">
+		INSERT INTO list_status	(list_key
+		<if test='date != null and !date.equals("")'>, list_date</if>, list_stat)
+		VALUES (#{key}
+		<if test='date != null and !date.equals("")'>, #{date}</if>
+		<if test='priority != null or !priority.equals("")'>, '1')</if>
+		<if test='priority == null or priority.equals("")'>, '2')</if>
+    </insert>
+</mapper>

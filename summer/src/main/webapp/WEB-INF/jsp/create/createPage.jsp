@@ -34,24 +34,25 @@ $(document).ready(function(){
 		else if(contents == null || contents == ""){
 			alert("내용을 입력해주세요.");
 		}
-		
-		$.ajax({
-			type : "POST"
-			, url : "/summer/createREST/saveTodo.do"
-			, data : {
-				subject : subject
-				, date : date
-				, contents : contents
-			}
-			, success : function(data) {
-				var form = $("#send_form");
-				form.attr('action', "/summer/main/mainPage.do");
-				form.submit();
-			}
-		    , error : function(e) {
-		    	console.log(e.result);
-		    }
-		});
+		else {
+			$.ajax({
+				type : "POST"
+				, url : "/summer/createREST/saveTodo.do"
+				, data : {
+					subject : subject
+					, date : date
+					, contents : contents
+				}
+				, success : function(data) {
+					var form = $("#send_form");
+					form.attr('action', "/summer/main/mainPage.do");
+					form.submit();
+				}
+			    , error : function(e) {
+			    	console.log(e.result);
+			    }
+			});
+		}
 	});
 });
 
@@ -61,7 +62,9 @@ function dateValidation(date) {
 	var day_check = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 	var date_split = date.split("-");
 	var Y, M, D;
-	if(date_split.length != 3){
+	if(date == null || date == "")
+		return true;
+	else if(date_split.length != 3){
 		alert("마감기한을 'YYYY-MM-DD' 형식에 맞춰 입력해주세요.");
 		return false;
 	}
