@@ -11,11 +11,16 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+	
 });
 
 </script>
-<div>
-	CREATE
+<div class='div_80'>
+	<input type='text' class='subject' id='create_subject' placeholder='제목을 입력하세요.'>
+	<input type='text' class='date' id='create_date' placeholder='YYYY-MM-DD'>
+	<textarea type='text' class='contents' id='create_contents' placeholder='내용을 입력하세요.'></textarea>
+	<input type='button' class='edit_button' id='cancel' value='취소'>
+	<input type='button' class='edit_button' id='create' value='생성' style='margin-right: 15px;'>
 </div>
 </body>
 </html>
