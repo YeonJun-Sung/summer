@@ -11,10 +11,90 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+	$("#cancel").on("click", function(){
+		var form = $("#send_form");
+		form.attr('action', "/summer/main/mainPage.do");
+		form.submit();
+	});
 	
+	$("#create").on("click", function(){
+		var subject = $("#create_subject").val();
+		var date = $("#create_date").val();
+		var contents = $("#create_contents").val();
+
+		var date_valid = dateValidation(date);
+		
+		console.log(date_valid);
+		if(!date_valid)	{
+			$("#create_date").val("");
+		}
+		else if(subject == null || subject == ""){
+			alert("제목을 입력해주세요.");
+		}
+		else if(contents == null || contents == ""){
+			alert("내용을 입력해주세요.");
+		}
+		
+		$.ajax({
+			type : "POST"
+			, url : "/summer/createREST/saveTodo.do"
+			, data : {
+				subject : subject
+				, date : date
+				, contents : contents
+			}
+			, success : function(data) {
+				var form = $("#send_form");
+				form.attr('action', "/summer/main/mainPage.do");
+				form.submit();
+			}
+		    , error : function(e) {
+		    	console.log(e.result);
+		    }
+		});
+	});
 });
 
+
+function dateValidation(date) {
+	var month_check = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+	var day_check = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+	var date_split = date.split("-");
+	var Y, M, D;
+	if(date_split.length != 3){
+		alert("마감기한을 'YYYY-MM-DD' 형식에 맞춰 입력해주세요.");
+		return false;
+	}
+	else {
+		Y = parseInt(date_split[0]);
+		M = parseInt(date_split[1]);
+		D = parseInt(date_split[2]);
+	}
+	
+	var today = new Date();
+	var year = today.getFullYear();
+	var month = today.getMonth() + 1;
+	var day = today.getDate();
+	var date_form = "" + year + "-" + ((month < 10)?("0"+month):month) + "-" + ((day < 10)?("0"+day):day);
+
+	if(Y < year)
+		alert("마감기한을 '" + date_form + "' 이후로 입력해주세요.");
+	else if(Y == year && M < month)
+		alert("마감기한을 '" + date_form + "' 이후로 입력해주세요.");
+	else if(Y == year && M == month && D < day)
+		alert("마감기한을 '" + date_form + "' 이후로 입력해주세요.");
+	else if($.inArray(date_split[1], month_check) == -1)
+		alert("마감기한을 'YYYY-MM-DD' 형식에 맞춰 입력해주세요.");
+	else if(D > day_check[M - 1] || D < 1)
+		alert("마감기한을 'YYYY-MM-DD' 형식에 맞춰 입력해주세요.");
+	else
+		return true;
+	
+	return false;
+}
+
 </script>
+<form id="send_form"></form>
 <div class='div_80'>
 	<input type='text' class='subject' id='create_subject' placeholder='제목을 입력하세요.'>
 	<input type='text' class='date' id='create_date' placeholder='YYYY-MM-DD'>
