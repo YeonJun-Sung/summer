@@ -12,19 +12,19 @@
 
 $(document).ready(function(){
 	$("#create").on("click", function(){
-		var form = $("#send_mode");
+		var form = $("#send_form");
 		form.attr('action', "/summer/create/createPage.do");
 		form.submit();
 	});
 	
 	$("#view").on("click", function(){
-		var form = $("#send_mode");
+		var form = $("#send_form");
 		form.attr('action', "/summer/view/viewPage.do");
 		form.submit();
 	});
 	
 	$("#alarm").on("click", function(){
-		var form = $("#send_mode");
+		var form = $("#send_form");
 		form.attr('action', "/summer/alarm/alarmPage.do");
 		form.submit();
 	});
