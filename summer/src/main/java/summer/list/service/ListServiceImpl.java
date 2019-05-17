@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import summer.list.dao.ListDAO;
 
-@Service("mainService")
+@Service("listService")
 public class ListServiceImpl implements ListService {
 	@Resource(name="listDAO")
     private ListDAO listDAO;
