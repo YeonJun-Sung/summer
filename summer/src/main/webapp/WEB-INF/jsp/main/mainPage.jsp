@@ -19,7 +19,7 @@ $(document).ready(function(){
 	
 	$("#view").on("click", function(){
 		var form = $("#send_form");
-		form.attr('action', "/summer/view/viewPage.do");
+		form.attr('action', "/summer/list/listPage.do");
 		form.submit();
 	});
 	
