@@ -13,9 +13,33 @@
 $(document).ready(function(){
 });
 
+
 </script>
 <div>
-	LIST
+	<table class='list_table'>
+		<colgroup>
+			<col width='50%'/>
+			<col width='50%'/>
+		</colgroup>
+		<thead>
+			<tr>
+				<th></th>
+				<th>우선순위</th>
+				<th>제목</th>
+				<th>마감기한</th>
+				<th>완료여부</th>
+			</tr>
+		</thead>
+		<tbody id='list_tbody'>
+			<tr>
+				<td><input type='checkbox'></td>
+				<td>priority</td>
+				<td>subject</td>
+				<td>date</td>
+				<td>status</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 </body>
 </html>
