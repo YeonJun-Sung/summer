@@ -37,7 +37,22 @@ public class ListController {
 		try {
 			Map<String, Object> param = listService.getTodoDetail(list_key);
 			mv.addObject("todo", param);
-			
+			return mv;			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			mv = new ModelAndView("main/mainPage");
+			return mv;
+		}
+	}
+	
+ 	@RequestMapping(value = "/list/editTodo.do")
+	public ModelAndView editTodo(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		ModelAndView mv = new ModelAndView("list/editTodo");
+		String list_key = req.getParameter("list_key");
+		try {
+			Map<String, Object> param = listService.getTodoDetail(list_key);
+			mv.addObject("todo", param);
 			return mv;			
 		}
 		catch(Exception e) {

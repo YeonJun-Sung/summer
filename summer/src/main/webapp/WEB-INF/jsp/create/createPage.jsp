@@ -22,6 +22,8 @@ $(document).ready(function(){
 		var subject = $("#create_subject").val();
 		var date = $("#create_date").val();
 		var contents = $("#create_contents").val();
+		contents = contents.replace(/(?:\r\n|\r|\n)/g, '<br />');
+		console.log(contents);
 
 		var date_valid = dateValidation(date);
 		

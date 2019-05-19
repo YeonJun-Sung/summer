@@ -10,23 +10,30 @@
 <body>
 <script type="text/javascript">
 
+
 $(document).ready(function(){
+	var content = $("#edit_contents").val();
+	content = replaceAll(content, '<br />', '\r\n');
+	$("#edit_contents").val(content);
+	
 	$("#cancel").on("click", function(){
 		var form = $("#send_form");
-		form.attr('action', "/summer/main/mainPage.do");
+		form.attr('action', "/summer/list/listPage.do");
 		form.submit();
 	});
 	
 	$("#create").on("click", function(){
-		var subject = $("#create_subject").val();
-		var date = $("#create_date").val();
-		var contents = $("#create_contents").val();
+		var subject = $("#edit_subject").val();
+		var date = $("#edit_date").val();
+		var contents = $("#edit_contents").val();
+		var list_key = $("#list_key").val();
+		contents = contents.replace(/(?:\r\n|\r|\n)/g, '<br />');
 
 		var date_valid = dateValidation(date);
 		
 		console.log(date_valid);
 		if(!date_valid)	{
-			$("#create_date").val("");
+			$("#edit_date").val("");
 		}
 		else if(subject == null || subject == ""){
 			alert("제목을 입력해주세요.");
@@ -37,15 +44,16 @@ $(document).ready(function(){
 		else {
 			$.ajax({
 				type : "POST"
-				, url : "/summer/createREST/saveTodo.do"
+				, url : "/summer/listREST/editTodo.do"
 				, data : {
 					subject : subject
 					, date : date
 					, contents : contents
+					, list_key : list_key
 				}
 				, success : function(data) {
 					var form = $("#send_form");
-					form.attr('action', "/summer/main/mainPage.do");
+					form.attr('action', "/summer/list/listPage.do");
 					form.submit();
 				}
 			    , error : function(e) {
@@ -96,14 +104,34 @@ function dateValidation(date) {
 	return false;
 }
 
+function replaceAll(str, search, replace) {
+	return str.split(search).join(replace);
+}
+
 </script>
 <form id="send_form"></form>
 <div class='div_80'>
-	<input type='text' class='subject' id='create_subject' placeholder='제목을 입력하세요.'>
-	<input type='text' class='date' id='create_date' placeholder='YYYY-MM-DD'>
-	<textarea type='text' class='contents' id='create_contents' placeholder='내용을 입력하세요.'></textarea>
+	<table class='detail_table'>
+		<colgroup>
+			<col width='80%'/>
+			<col width='20%'/>
+		</colgroup>
+		<tr style='height:30px;'>
+			<td id='detail_subject'>
+				<input type='text' class='subject' id='edit_subject' placeholder='제목을 입력하세요.' value='${todo.list_subject }'>
+			</td>
+			<td id='detail_date' style='text-align:center;'>
+				<input type='text' class='date' id='edit_date' placeholder='YYYY-MM-DD' value='${todo.list_date }'>
+			</td>
+		</tr>
+		<tr style='height:500px; vertical-align: top;'>
+			<td id='detail_contents' colspan='2'>
+				<textarea type='text' class='contents' id='edit_contents' placeholder='내용을 입력하세요.'>${todo.list_content }</textarea>
+			</td>
+		</tr>
+	</table>
 	<input type='button' class='edit_button' id='cancel' value='취소'>
-	<input type='button' class='edit_button' id='create' value='생성' style='margin-right: 15px;'>
+	<input type='button' class='edit_button' id='edit' value='수정' style='margin-right: 15px;'>
 </div>
 </body>
 </html>

@@ -31,7 +31,7 @@ $(document).ready(function(){
 
 </script>
 <form id="send_form">
-	<input type='hidden' id='list_key' value='${todo.list_key }'>
+	<input type='hidden' name='list_key' id='list_key' value='${todo.list_key }'>
 </form>
 <div class='div_80'>
 	<table class='detail_table'>
