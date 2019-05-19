@@ -8,6 +8,7 @@ tomcat8
 
 # apt-get update  
 ``` Ubuntu 
+sudo passwd
 su  
 apt-get update  
 ```  
