@@ -41,7 +41,17 @@ $(document).ready(function(){
 			offset = (page - 1) * 10;
 			listRefresh();
 		}
-	})
+	});
+	
+	$("body").on("click", ".list_subject", function(){
+		var key = $(this).data("key");
+		var form = $("#send_form");
+		$("#list_key").val(key);
+		console.log(key);
+		form.attr('method', 'POST');
+		form.attr('action', "/summer/list/detailTodo.do");
+		form.submit();
+	});
 });
 
 function listRefresh(){
@@ -64,7 +74,7 @@ function listRefresh(){
 					rtvHtml += "" + temp.list_pri + "</td>";
 				else
 					rtvHtml += "-</td>";
-				rtvHtml += "<td>" + temp.list_subject +"</td>";
+				rtvHtml += "<td class='list_subject' data-key='" + temp.list_key + "'>" + temp.list_subject +"</td>";
 				rtvHtml += "<td style='text-align: center;'>";
 				if(temp.list_date != null && temp.list_date != "")
 					rtvHtml += "" + temp.list_date + "</td>";
@@ -125,6 +135,9 @@ function paging() {
 }
 
 </script>
+<form id='send_form'>
+	<input type='hidden' id='list_key' value=''>
+</form>
 <div class='div_80'>
 	<table class='list_table'>
 		<colgroup>
