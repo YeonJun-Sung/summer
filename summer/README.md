@@ -96,8 +96,8 @@ mysql -uroot -p
 ``` 
 ``` MySQL
 create database summer_coding;  
-create user 'root'@localhost identified by '1234';  
-GRANT ALL PRIVILEGES ON todolist.* TO 'root'@localhost IDENTIFIED BY '1234';  
+create user 'xxung'@localhost identified by '0731';  
+GRANT ALL PRIVILEGES ON summer_coding.* TO 'xxung'@localhost IDENTIFIED BY '0731';  
 flush privileges;  
 exit
 ```
