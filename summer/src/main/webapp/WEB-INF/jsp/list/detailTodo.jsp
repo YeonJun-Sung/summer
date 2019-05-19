@@ -22,7 +22,6 @@ $(document).ready(function(){
 	
 	$("#edit").on("click", function(){
 		var form = $("#send_form");
-		form.attr('method', "POST");
 		form.attr('action', "/summer/list/editTodo.do");
 		form.submit();
 	});

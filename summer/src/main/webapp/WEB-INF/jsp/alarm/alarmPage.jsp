@@ -48,7 +48,6 @@ $(document).ready(function(){
 		var form = $("#send_form");
 		$("#list_key").val(key);
 		console.log(key);
-		form.attr('method', 'POST');
 		form.attr('action', "/summer/list/detailTodo.do");
 		form.submit();
 	});

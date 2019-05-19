@@ -106,7 +106,7 @@ function listRefresh(){
 	}
 	
 	$.ajax({
-		type : "GET"
+		type : "POST"
 		, url : "/summer/listREST/getList.do"
 		, data : {
 			offset : offset
@@ -157,7 +157,7 @@ function listRefresh(){
 
 function getListSize() {
 	$.ajax({
-		type : "GET"
+		type : "POST"
 		, url : "/summer/listREST/getListSize.do"
 		, data : {
 			check: "pri"

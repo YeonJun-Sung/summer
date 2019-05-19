@@ -134,11 +134,13 @@ public class ListRestController {
 			param.put("list_key", list_key);
 			String priority = listRestService.getPriority(param);
 			
-			param.put("priority", priority);
-			listRestService.removePriority(param);
-			
-			param.put("status", 2);
-			listRestService.updateStatus(param);
+			if(priority != null && !priority.equals("")) {
+				param.put("priority", priority);
+				listRestService.removePriority(param);
+				
+				param.put("status", 2);
+				listRestService.updateStatus(param);
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();

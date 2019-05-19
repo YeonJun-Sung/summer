@@ -8,7 +8,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/summer_coding?useSSL=false&amp;allowMultiQueries=true"/>
         <property name="username" value="xxung"/>
-        <property name="password" value="1234"/>
+        <property name="password" value="0731"/>
     </bean>
     <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
         <constructor-arg ref="dataSourceSpied" />

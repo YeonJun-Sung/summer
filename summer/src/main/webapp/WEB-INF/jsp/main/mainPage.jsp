@@ -13,21 +13,18 @@
 $(document).ready(function(){
 	$("#create").on("click", function(){
 		var form = $("#send_form");
-		form.attr('method', "POST");
 		form.attr('action', "/summer/create/createPage.do");
 		form.submit();
 	});
 	
 	$("#view").on("click", function(){
 		var form = $("#send_form");
-		form.attr('method', "POST");
 		form.attr('action', "/summer/list/listPage.do");
 		form.submit();
 	});
 	
 	$("#alarm").on("click", function(){
 		var form = $("#send_form");
-		form.attr('method', "POST");
 		form.attr('action', "/summer/alarm/alarmPage.do");
 		form.submit();
 	});

@@ -13,7 +13,6 @@
 $(document).ready(function(){
 	$("#cancel").on("click", function(){
 		var form = $("#send_form");
-		form.attr('method', "POST");
 		form.attr('action', "/summer/main/mainPage.do");
 		form.submit();
 	});
@@ -48,7 +47,6 @@ $(document).ready(function(){
 				}
 				, success : function(data) {
 					var form = $("#send_form");
-					form.attr('method', "POST");
 					form.attr('action', "/summer/main/mainPage.do");
 					form.submit();
 				}
