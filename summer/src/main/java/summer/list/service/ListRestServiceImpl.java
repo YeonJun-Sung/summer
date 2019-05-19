@@ -34,7 +34,7 @@ public class ListRestServiceImpl implements ListRestService {
 		// TODO Auto-generated method stub
 		listRestDAO.editTodo(param);
 		String date = (String) param.get("date");
-		if(date != null && date.equals(""))
+		if(date != null && !date.equals(""))
 			listRestDAO.editTodoDate(param);
 	}
 
