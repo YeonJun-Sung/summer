@@ -29,7 +29,7 @@ public class ListController {
  	@RequestMapping(value = "/list/detailTodo.do")
 	public ModelAndView detailTodo(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		ModelAndView mv = new ModelAndView("list/detailTodo");
-		String list_key = (String) req.getAttribute("list_key");
+		String list_key = req.getParameter("list_key");
 		try {
 			Map<String, Object> param = listService.getTodoDetail(list_key);
 			mv.addObject("todo", param);
@@ -45,7 +45,7 @@ public class ListController {
  	@RequestMapping(value = "/list/editTodo.do")
 	public ModelAndView editTodo(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		ModelAndView mv = new ModelAndView("list/editTodo");
-		String list_key = (String) req.getAttribute("list_key");
+		String list_key = req.getParameter("list_key");
 		try {
 			Map<String, Object> param = listService.getTodoDetail(list_key);
 			mv.addObject("todo", param);

@@ -12,7 +12,15 @@
 		<if test='check.equals("pri")'>
 		WHERE list_stat = 1 or list_stat = 2
 		</if>
-		ORDER BY list_pri is null ASC, list_pri ASC, list_stat ASC, list_date ASC 
+		<if test='check.equals("expire")'>
+		WHERE list_stat = -1 or list_stat = 0
+		</if>
+		<if test='check.equals("expire")'>
+		ORDER BY list_stat DESC
+		</if>
+		<if test='!check.equals("expire")'>
+		ORDER BY list_pri is null ASC, list_pri ASC, list_stat ASC, list_date ASC
+		</if>
 		limit 10
 		offset ${offset};
 	</select>
@@ -22,6 +30,9 @@
 		FROM list_status
 		<if test='check.equals("pri")'>
 		WHERE list_stat = 1 or list_stat = 2
+		</if>
+		<if test='check.equals("expire")'>
+		WHERE list_stat = -1 or list_stat = 0
 		</if>
 	</select>
 	

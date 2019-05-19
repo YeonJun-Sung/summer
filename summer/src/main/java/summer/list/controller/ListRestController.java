@@ -87,6 +87,13 @@ public class ListRestController {
 				if(key_arr[i] != null && !key_arr[i].equals("")) {
 					Map<String, Object> param = new HashMap<String, Object>();
 					param.put("list_key", key_arr[i]);
+					String priority = listRestService.getPriority(param);
+					
+					if(priority != null && !priority.equals("")) {
+						param.put("priority", priority);
+						listRestService.removePriority(param);
+					}
+					
 					list.add(param);
 				}
 			}

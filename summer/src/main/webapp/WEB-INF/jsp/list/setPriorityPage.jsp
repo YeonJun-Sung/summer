@@ -104,7 +104,7 @@ function listRefresh(){
 			var rtvHtml = "";
 			
 			if(data.length == 0) {
-				offset = offset - 10
+				offset = (offset - 10 < 0?0:offset - 10);
 				listRefresh()
 				return;
 			}

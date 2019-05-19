@@ -31,6 +31,36 @@ $(document).ready(function(){
 		form.attr('action', "/summer/alarm/alarmPage.do");
 		form.submit();
 	});
+	
+	$("body").on("click", ".black, #close", function(){
+		$(".black").hide();
+		$(".alarm_dialog").hide();
+	});
+	
+	$.ajax({
+		type : "GET"
+		, url : "/summer/alarmREST/expireTodo.do"
+		, data : {
+			check : "alarm"
+		}
+		, success : function(data) {
+			console.log(data);
+			if(data != 0){
+				$(".black").show();
+				$(".alarm_dialog").show();
+				var rtvHtml = "";
+				for(var i = 0;i < data.length;i++) {
+					var temp = data[i];
+					rtvHtml += "<div style='margin-bottom:10px;'> ▶ " + temp.list_subject + "</div>";
+				}
+				$(".vertical_scroll").empty();
+				$(".vertical_scroll").append(rtvHtml);
+			}
+		}
+	    , error : function(e) {
+	    	console.log(e.result);
+	    }
+	});
 });
 </script>
 <form id="send_form">
@@ -39,6 +69,13 @@ $(document).ready(function(){
 	<input type='button' class='main_button' id='create' value='TODO 생성'>
 	<input type='button' class='main_button' id='view' value='TODO 리스트 보기'>
 	<input type='button' class='main_button' id='alarm' value='마감된 TODO'>
+</div>
+<div class='black'></div>
+<div class='alarm_dialog'>
+	<input type='button' class='edit_button' id='close' value='X' style='margin-bottom: 5px; width: 26px; height: 21px;'>
+	<div class='vertical_scroll' style='overflow-y:scroll; width:100%; height: 374px;'>
+		
+	</div>
 </div>
 </body>
 </html>

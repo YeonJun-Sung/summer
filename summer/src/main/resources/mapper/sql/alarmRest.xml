@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="listRest">
+	<select id="expireTodo" parameterType="hashmap" resultType="hashmap">
+		SELECT *
+		FROM list_contents a
+			LEFT OUTER JOIN list_priority b
+			on a.list_key = b.list_key
+			LEFT OUTER JOIN list_status c
+			on a.list_key = c.list_key
+		WHERE DATEDIFF(list_date, now()) <![CDATA[<=]]> 0
+			and list_date is not null
+			<if test='check.equals("alarm")'>
+			and list_stat != '-1'
+			</if>
+	</select>
+</mapper>
