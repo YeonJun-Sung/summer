@@ -147,8 +147,10 @@ public class ListRestController {
 			listRestService.completeTodo(param);
 			String priority = listRestService.getPriority(param);
 			
-			param.put("priority", priority);
-			listRestService.removePriority(param);
+			if(priority != null && !priority.equals("")) {
+				param.put("priority", priority);
+				listRestService.removePriority(param);
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
