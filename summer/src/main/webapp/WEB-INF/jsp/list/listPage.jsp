@@ -93,6 +93,24 @@ $(document).ready(function(){
 			});
 		}
 	});
+	
+	$("body").on("click", ".complete_bt", function(){
+		var list_key = $(this).data("key");
+
+		$.ajax({
+			type : "POST"
+			, url : "/summer/listREST/completeTodo.do"
+			, data : {
+				list_key : list_key
+			}
+			, success : function(data) {
+				listRefresh();
+			}
+		    , error : function(e) {
+		    	console.log(e.result);
+		    }
+		});
+	})
 });
 
 function listRefresh(){
@@ -131,11 +149,12 @@ function listRefresh(){
 					rtvHtml += "" + temp.list_date + "</td>";
 				else
 					rtvHtml += "-</td>";
-				rtvHtml += "<td style='text-align: center;'>";
+				rtvHtml += "<td style='text-align: center; padding: 5px 0px; font-size: small;'>";
 				if(temp.list_stat == 3)
-					rtvHtml += "완료</td>";
+					rtvHtml += "완료된 TODO";
 				else
-					rtvHtml += "-</td>";
+					rtvHtml += "<input type='button' class='complete_bt' value='완료하기' data-key='" + temp.list_key + "'>";
+				rtvHtml += "</td>";
 				rtvHtml += "</tr>";
 			}
 			

@@ -16,4 +16,5 @@ public interface ListRestService {
 	void updateStatus(Map<String, Object> param) throws Exception;
 	void removePriority(Map<String, Object> param) throws Exception;
 	String getPriority(Map<String, Object> param) throws Exception;
+	void completeTodo(Map<String, Object> param) throws Exception;
 }

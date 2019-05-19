@@ -137,4 +137,21 @@ public class ListRestController {
 			e.printStackTrace();
 		}
 	}
+	
+	@RequestMapping(value = "/listREST/completeTodo.do", method = RequestMethod.POST)
+	public void completeTodo(HttpServletRequest req, HttpSession session) throws Exception {
+		try {
+			String list_key = req.getParameter("list_key");
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("list_key", list_key);
+			listRestService.completeTodo(param);
+			String priority = listRestService.getPriority(param);
+			
+			param.put("priority", priority);
+			listRestService.removePriority(param);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

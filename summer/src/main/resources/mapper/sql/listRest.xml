@@ -109,4 +109,11 @@
 			and list_pri <![CDATA[>=]]> ${priority}
 			</if>
 	</update>
+	
+	<update id="completeTodo" parameterType="hashmap">
+		UPDATE list_status
+		SET
+			list_stat = 3
+		WHERE list_key = #{list_key}
+	</update>
 </mapper>

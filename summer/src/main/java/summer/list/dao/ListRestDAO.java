@@ -76,4 +76,9 @@ public class ListRestDAO extends AbstractDAO {
 		update("listRest.pullPriorityNum", param);
 	}
 
+	public void completeTodo(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		update("listRest.completeTodo", param);
+	}
+
 }

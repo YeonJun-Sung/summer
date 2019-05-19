@@ -79,4 +79,10 @@ public class ListRestServiceImpl implements ListRestService {
 		listRestDAO.removePriority(param);
 		listRestDAO.pullPriorityNum(param);
 	}
+
+	@Override
+	public void completeTodo(Map<String, Object> param) throws Exception {
+		// TODO Auto-generated method stub
+		listRestDAO.completeTodo(param);
+	}
 }
