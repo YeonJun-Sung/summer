@@ -50,4 +50,25 @@ public class ListRestController {
 			return new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@RequestMapping(value = "/listREST/editTodo.do", method = RequestMethod.POST)
+	public void editTodo(HttpServletRequest req, HttpSession session) throws Exception {
+		try {
+			String subject = req.getParameter("subject");
+			String date = req.getParameter("date");
+			String contents = req.getParameter("contents");
+			String list_key = req.getParameter("list_key");
+			
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("subject", subject);
+			param.put("date", date);
+			param.put("contents", contents);
+			param.put("list_key", list_key);
+			
+			listRestService.editTodo(param);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

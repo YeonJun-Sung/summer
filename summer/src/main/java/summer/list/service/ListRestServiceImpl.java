@@ -29,4 +29,13 @@ public class ListRestServiceImpl implements ListRestService {
 		return listRestDAO.getListSize();
 	}
 
+	@Override
+	public void editTodo(Map<String, Object> param) throws Exception {
+		// TODO Auto-generated method stub
+		listRestDAO.editTodo(param);
+		String date = (String) param.get("date");
+		if(date != null && date.equals(""))
+			listRestDAO.editTodoDate(param);
+	}
+
 }

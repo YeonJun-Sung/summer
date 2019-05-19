@@ -21,4 +21,14 @@ public class ListRestDAO extends AbstractDAO {
 		return (int) selectOne("listRest.getListSize", "");
 	}
 
+	public void editTodo(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		update("listRest.editTodo", param);
+	}
+
+	public void editTodoDate(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		update("listRest.editTodoDate", param);
+	}
+
 }

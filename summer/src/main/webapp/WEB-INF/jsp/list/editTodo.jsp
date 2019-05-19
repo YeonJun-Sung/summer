@@ -22,7 +22,7 @@ $(document).ready(function(){
 		form.submit();
 	});
 	
-	$("#create").on("click", function(){
+	$("#edit").on("click", function(){
 		var subject = $("#edit_subject").val();
 		var date = $("#edit_date").val();
 		var contents = $("#edit_contents").val();
@@ -110,13 +110,16 @@ function replaceAll(str, search, replace) {
 
 </script>
 <form id="send_form"></form>
+<input type='hidden' id='list_key' value='${todo.list_key }'>
 <div class='div_80'>
 	<table class='detail_table'>
 		<colgroup>
-			<col width='80%'/>
+			<col width='10%'/>
+			<col width='70%'/>
 			<col width='20%'/>
 		</colgroup>
 		<tr style='height:30px;'>
+			<td style='text-align:center;'>제목</td>
 			<td id='detail_subject'>
 				<input type='text' class='subject' id='edit_subject' placeholder='제목을 입력하세요.' value='${todo.list_subject }'>
 			</td>
@@ -125,6 +128,7 @@ function replaceAll(str, search, replace) {
 			</td>
 		</tr>
 		<tr style='height:500px; vertical-align: top;'>
+			<td style='text-align: center;vertical-align: middle;'>내용</td>
 			<td id='detail_contents' colspan='2'>
 				<textarea type='text' class='contents' id='edit_contents' placeholder='내용을 입력하세요.'>${todo.list_content }</textarea>
 			</td>

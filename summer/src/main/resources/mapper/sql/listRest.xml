@@ -19,4 +19,19 @@
 		SELECT count(*)
 		FROM list_contents
 	</select>
+	
+	<update id="editTodo" parameterType="hashmap">
+		UPDATE list_contents
+		SET
+			list_subject = #{subject}
+			, list_content = #{contents}
+		WHERE list_key = #{list_key}
+	</update>
+	
+	<update id="editTodoDate" parameterType="hashmap">
+		UPDATE list_status
+		SET
+			list_date = #{date}
+		WHERE list_key = #{list_key}
+	</update>
 </mapper>

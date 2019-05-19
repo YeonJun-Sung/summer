@@ -23,15 +23,20 @@ public class CreateRestController {
 	
 	@RequestMapping(value = "/createREST/saveTodo.do", method = RequestMethod.POST)
 	public void saveTodo(HttpServletRequest req, HttpSession session) throws Exception {
-		String subject = req.getParameter("subject");
-		String date = req.getParameter("date");
-		String contents = req.getParameter("contents");
-		
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("subject", subject);
-		param.put("date", date);
-		param.put("contents", contents);
-		
-		createRestService.saveTodo(param);
+		try {
+			String subject = req.getParameter("subject");
+			String date = req.getParameter("date");
+			String contents = req.getParameter("contents");
+			
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("subject", subject);
+			param.put("date", date);
+			param.put("contents", contents);
+			
+			createRestService.saveTodo(param);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
