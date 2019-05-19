@@ -38,7 +38,7 @@ $(document).ready(function(){
 	});
 	
 	$.ajax({
-		type : "GET"
+		type : "POST"
 		, url : "/summer/alarmREST/expireTodo.do"
 		, data : {
 			check : "alarm"

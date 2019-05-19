@@ -20,7 +20,7 @@ public class CreateRestController {
 	@Resource(name = "createRestService")
 	private CreateRestService createRestService;
 	
-	@RequestMapping(value = "/createREST/saveTodo.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/createREST/saveTodo.do")
 	public void saveTodo(HttpServletRequest req, HttpSession session) throws Exception {
 		try {
 			String subject = req.getParameter("subject");

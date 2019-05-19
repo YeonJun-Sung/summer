@@ -7,7 +7,7 @@
     <bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/summer_coding?useSSL=false&amp;allowMultiQueries=true"/>
-        <property name="username" value="root"/>
+        <property name="username" value="xxung"/>
         <property name="password" value="1234"/>
     </bean>
     <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">

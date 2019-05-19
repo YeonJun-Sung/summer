@@ -24,7 +24,7 @@ public class AlarmRestController {
 	@Resource(name = "alarmRestService")
 	private AlarmRestService alarmRestService;
 
-	@RequestMapping(value = "/alarmREST/expireTodo.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/alarmREST/expireTodo.do")
 	public ResponseEntity<List<Map<String, Object>>> expireTodo(HttpServletRequest req, HttpSession session) throws Exception {
 		try {
 			String check = req.getParameter("check");
@@ -43,7 +43,7 @@ public class AlarmRestController {
 		}
 	}
 
-	@RequestMapping(value = "/alarmREST/alarmCompleteExpireTodo.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/alarmREST/alarmCompleteExpireTodo.do")
 	public void alarmCompleteExpireTodo(HttpServletRequest req, HttpSession session) throws Exception {
 		try {
 			String list_keys = req.getParameter("list_keys");

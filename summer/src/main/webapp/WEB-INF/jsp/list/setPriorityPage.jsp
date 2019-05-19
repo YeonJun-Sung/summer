@@ -16,9 +16,8 @@ var page_size = 0;
 var offset = 0;
 
 $(document).ready(function(){
-	listRefresh();
 	getListSize();
-
+	
 	$("body").on("click", "#pre_bt", function(){
 		if(min != 1){
 			console.log("pre");
@@ -92,6 +91,20 @@ $(document).ready(function(){
 });
 
 function listRefresh(){
+	if(list_size == 0) {
+		var rtvHtml = "";
+		for(var i = 0;i < 10;i++) {
+			rtvHtml += "<tr style='height: 49px;'>";
+			rtvHtml += "<td colspan='5'></td>";
+			rtvHtml += "</tr>";
+		}
+
+		$("#list_tbody").empty();
+		$("#list_tbody").prepend(rtvHtml);
+		
+		return;
+	}
+	
 	$.ajax({
 		type : "GET"
 		, url : "/summer/listREST/getList.do"
@@ -154,6 +167,7 @@ function getListSize() {
 			list_size = data;
 			page_size = Math.ceil(list_size / 10);
 			paging();
+			listRefresh();
 		}
 	    , error : function(e) {
 	    	console.log(e.result);
@@ -163,17 +177,21 @@ function getListSize() {
 
 function paging() {
 	var rtvHtml = "<input type='button' id='pre_bt' value='<' style='margin-right: 30px;'>";
-	for(var i = min;i < min + 10;i++) {
-		rtvHtml += "<span class='page' style='padding: 0px 10px;'>";
-		rtvHtml += "" + i;
-		rtvHtml += "</span>";
-		if(i == page_size)	break;
-	}
+	
 	if(page_size == 0){
 		rtvHtml += "<span class='page' style='padding: 0px 10px;'>";
 		rtvHtml += "" + 1;
 		rtvHtml += "</span>";
 	}
+	else {
+		for(var i = min;i < min + 10;i++) {
+			rtvHtml += "<span class='page' style='padding: 0px 10px;'>";
+			rtvHtml += "" + i;
+			rtvHtml += "</span>";
+			if(i == page_size)	break;
+		}
+	}
+	
 	rtvHtml += "<input type='button' id='next_bt' value='>' style='margin-left: 30px;'>";
 	
 	$(".paging_div").empty();

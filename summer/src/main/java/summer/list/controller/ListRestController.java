@@ -24,7 +24,7 @@ public class ListRestController {
 	@Resource(name = "listRestService")
 	private ListRestService listRestService;
 	
-	@RequestMapping(value = "/listREST/getList.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/listREST/getList.do")
 	public ResponseEntity<List<Map<String, Object>>> getList(HttpServletRequest req, HttpSession session) throws Exception {
 		String offset = req.getParameter("offset");
 		String check = req.getParameter("check");
@@ -41,7 +41,7 @@ public class ListRestController {
 		}
 	}
 	
-	@RequestMapping(value = "/listREST/getListSize.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/listREST/getListSize.do")
 	public ResponseEntity<Integer> getListSize(HttpServletRequest req, HttpSession session) throws Exception {
 		String check = req.getParameter("check");
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -56,7 +56,7 @@ public class ListRestController {
 		}
 	}
 	
-	@RequestMapping(value = "/listREST/editTodo.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/listREST/editTodo.do")
 	public void editTodo(HttpServletRequest req, HttpSession session) throws Exception {
 		try {
 			String subject = req.getParameter("subject");
@@ -77,7 +77,7 @@ public class ListRestController {
 		}
 	}
 	
-	@RequestMapping(value = "/listREST/deleteTodo.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/listREST/deleteTodo.do")
 	public void deleteTodo(HttpServletRequest req, HttpSession session) throws Exception {
 		try {
 			String list_key = req.getParameter("list_key");
@@ -105,7 +105,7 @@ public class ListRestController {
 		}
 	}
 	
-	@RequestMapping(value = "/listREST/setPriority.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/listREST/setPriority.do")
 	public void setPriority(HttpServletRequest req, HttpSession session) throws Exception {
 		try {
 			String priority = req.getParameter("priority");
@@ -126,7 +126,7 @@ public class ListRestController {
 		}
 	}
 	
-	@RequestMapping(value = "/listREST/removePriority.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/listREST/removePriority.do")
 	public void removePriority(HttpServletRequest req, HttpSession session) throws Exception {
 		try {
 			String list_key = req.getParameter("list_key");
@@ -145,7 +145,7 @@ public class ListRestController {
 		}
 	}
 	
-	@RequestMapping(value = "/listREST/completeTodo.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/listREST/completeTodo.do")
 	public void completeTodo(HttpServletRequest req, HttpSession session) throws Exception {
 		try {
 			String list_key = req.getParameter("list_key");
