@@ -101,9 +101,12 @@
 		SET
 			list_pri = list_pri - 1
 		WHERE list_pri is not null
+			<if test='pre_priority != null and priority != null'>
 			and list_pri <![CDATA[>=]]> ${pre_priority}
-			<if test='priority != null'>
 			and list_pri <![CDATA[<=]]> ${priority}
+			</if>
+			<if test='pre_priority == null and priority != null'>
+			and list_pri <![CDATA[>=]]> ${priority}
 			</if>
 	</update>
 </mapper>
