@@ -24,9 +24,9 @@ public class ListRestServiceImpl implements ListRestService {
 	}
 
 	@Override
-	public int getListSize() throws Exception {
+	public int getListSize(Map<String, Object> param) throws Exception {
 		// TODO Auto-generated method stub
-		return listRestDAO.getListSize();
+		return listRestDAO.getListSize(param);
 	}
 
 	@Override
@@ -44,5 +44,39 @@ public class ListRestServiceImpl implements ListRestService {
 		listRestDAO.deleteTodoPriority(list);
 		listRestDAO.deleteTodoStatus(list);
 		listRestDAO.deleteTodo(list);
+	}
+
+	@Override
+	public void setPriority(Map<String, Object> param) throws Exception {
+		// TODO Auto-generated method stub
+		String pre = (String) param.get("pre_priority");
+		String target = (String) param.get("priority");
+
+		if(pre == null || pre.equals(""))
+			listRestDAO.pushPriorityNum(param);
+		else if(Integer.parseInt(pre) > Integer.parseInt(target))
+			listRestDAO.pushPriorityNum(param);
+		else if(Integer.parseInt(pre) < Integer.parseInt(target))
+			listRestDAO.pullPriorityNum(param);
+		listRestDAO.setPriority(param);
+	}
+
+	@Override
+	public void updateStatus(Map<String, Object> param) throws Exception {
+		// TODO Auto-generated method stub
+		listRestDAO.updateStatus(param);
+	}
+
+	@Override
+	public String getPriority(Map<String, Object> param) throws Exception {
+		// TODO Auto-generated method stub
+		return listRestDAO.getPriority(param);
+	}
+
+	@Override
+	public void removePriority(Map<String, Object> param) throws Exception {
+		// TODO Auto-generated method stub
+		listRestDAO.removePriority(param);
+		listRestDAO.pullPriorityNum(param);
 	}
 }

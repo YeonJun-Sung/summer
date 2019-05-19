@@ -9,15 +9,20 @@
 			on a.list_key = b.list_key
 			LEFT OUTER JOIN list_status c
 			on a.list_key = c.list_key
+		<if test='check.equals("pri")'>
 		WHERE list_stat = 1 or list_stat = 2
+		</if>
 		ORDER BY list_pri is null ASC, list_pri ASC, list_stat ASC, list_date ASC 
 		limit 10
 		offset ${offset};
 	</select>
 	
-	<select id="getListSize" resultType="Integer">
+	<select id="getListSize" parameterType="hashmap" resultType="Integer">
 		SELECT count(*)
-		FROM list_contents
+		FROM list_status
+		<if test='check.equals("pri")'>
+		WHERE list_stat = 1 or list_stat = 2
+		</if>
 	</select>
 	
 	<update id="editTodo" parameterType="hashmap">
@@ -52,4 +57,53 @@
 		DELETE FROM list_status WHERE list_key = #{up.list_key}
 		</foreach>
 	</delete>
+
+	<update id="pushPriorityNum" parameterType="hashmap">
+		UPDATE list_priority
+		SET
+			list_pri = list_pri + 1
+		WHERE list_pri is not null
+			and list_pri <![CDATA[>=]]> ${priority}
+			<if test='pre_priority != null'>
+			and list_pri <![CDATA[<=]]> ${pre_priority}
+			</if>
+	</update>
+	
+	<update id="setPriority" parameterType="hashmap">
+		UPDATE list_priority
+		SET
+			list_pri = ${priority}
+		WHERE list_key = #{list_key}
+	</update>
+	
+	<update id="updateStatus" parameterType="hashmap">
+		UPDATE list_status
+		SET
+			list_stat = #{status}
+		WHERE list_key = #{list_key}
+	</update>
+	
+	<select id="getPriority" parameterType="hashmap" resultType="String">
+		SELECT list_pri
+		FROM list_priority
+		WHERE list_key = #{list_key}
+	</select>
+	
+	<update id="removePriority" parameterType="hashmap">
+		UPDATE list_priority
+		SET
+			list_pri = null
+		WHERE list_key = #{list_key}
+	</update>
+
+	<update id="pullPriorityNum" parameterType="hashmap">
+		UPDATE list_priority
+		SET
+			list_pri = list_pri - 1
+		WHERE list_pri is not null
+			and list_pri <![CDATA[>=]]> ${pre_priority}
+			<if test='priority != null'>
+			and list_pri <![CDATA[<=]]> ${priority}
+			</if>
+	</update>
 </mapper>

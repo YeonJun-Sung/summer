@@ -73,3 +73,9 @@ table {
 .detail_table tr td {
 	border: 1px solid black;
 }
+
+.list_priority {
+	width: 100%;
+	height: 100%;
+	border: none;
+}

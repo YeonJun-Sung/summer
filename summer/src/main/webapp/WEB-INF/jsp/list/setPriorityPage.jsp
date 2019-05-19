@@ -43,49 +43,45 @@ $(document).ready(function(){
 		}
 	});
 	
-	$("body").on("click", ".list_subject", function(){
-		var key = $(this).data("key");
-		var form = $("#send_form");
-		$("#list_key").val(key);
-		console.log(key);
-		form.attr('method', 'POST');
-		form.attr('action', "/summer/list/detailTodo.do");
-		form.submit();
-	});
-	
 	$("#back").on("click", function(){
 		var form = $("#send_form");
-		form.attr('action', "/summer/main/mainPage.do");
+		form.attr('action', "/summer/list/listPage.do");
 		form.submit();
 	});
 	
-	$("#priority").on("click", function(){
-		var form = $("#send_form");
-		form.attr('action', "/summer/list/setPriorityPage.do");
-		form.submit();
-	});
-	
-	$("#delete").on("click", function(){
-		var subject = 0;
-		var list_key = "";
-		$(".list_check").each(function(){
-			if($(this).is(":checked")){
-				list_key += $(this).data("key") + "/";
-				subject = subject + 1;
-			}
-		});
-		var check = confirm("TODO " + subject + "개를 삭제하시겠습니까?");
-		
-		if(check) {
+	$("body").on("change", ".list_priority", function(){
+		var priority = $(this).val();
+		var list_key = $(this).data("key");
+		if(priority <= 0) {
+			$(this).val("");
 			$.ajax({
 				type : "POST"
-				, url : "/summer/listREST/deleteTodo.do"
+				, url : "/summer/listREST/removePriority.do"
 				, data : {
-					list_key : list_key
+					list_key: list_key
 				}
 				, success : function(data) {
+					console.log(data);
+					
 					listRefresh();
-					getListSize();
+				}
+			    , error : function(e) {
+			    	console.log(e.result);
+			    }
+			});
+		}
+		else {
+			$.ajax({
+				type : "POST"
+				, url : "/summer/listREST/setPriority.do"
+				, data : {
+					priority: priority
+					, list_key: list_key
+				}
+				, success : function(data) {
+					console.log(data);
+					
+					listRefresh();
 				}
 			    , error : function(e) {
 			    	console.log(e.result);
@@ -101,7 +97,7 @@ function listRefresh(){
 		, url : "/summer/listREST/getList.do"
 		, data : {
 			offset : offset
-			, check : "none"
+			, check: "pri"
 		}
 		, success : function(data) {
 			console.log(data);
@@ -117,23 +113,15 @@ function listRefresh(){
 				var temp = data[i];
 				
 				rtvHtml += "<tr style='height: 49px;'>";
-				rtvHtml += "<td style='text-align: center;'>";
-				rtvHtml += "<input type='checkbox' class='list_check' data-key='" + temp.list_key + "' data-subject='" + temp.list_subject + "'>";
-				rtvHtml += "</td>";
-				rtvHtml += "<td style='text-align: center;'>";
+				rtvHtml += "<td style='text-align: center; padding: 0px;'>";
+				rtvHtml += "<input type='number' class='list_priority' value='"
 				if(temp.list_stat == 1)
-					rtvHtml += "" + temp.list_pri + "</td>";
-				else
-					rtvHtml += "-</td>";
-				rtvHtml += "<td class='list_subject' data-key='" + temp.list_key + "'>" + temp.list_subject +"</td>";
+					rtvHtml += "" + temp.list_pri;
+				rtvHtml += "' data-key='" + temp.list_key + "' style='text-align: center;'></td>";
+				rtvHtml += "<td class='list_subject'>" + temp.list_subject +"</td>";
 				rtvHtml += "<td style='text-align: center;'>";
 				if(temp.list_date != null && temp.list_date != "")
 					rtvHtml += "" + temp.list_date + "</td>";
-				else
-					rtvHtml += "-</td>";
-				rtvHtml += "<td style='text-align: center;'>";
-				if(temp.list_stat == 3)
-					rtvHtml += "완료</td>";
 				else
 					rtvHtml += "-</td>";
 				rtvHtml += "</tr>";
@@ -159,7 +147,7 @@ function getListSize() {
 		type : "GET"
 		, url : "/summer/listREST/getListSize.do"
 		, data : {
-			check : "none"
+			check: "pri"
 		}
 		, success : function(data) {
 			console.log(data);
@@ -197,24 +185,18 @@ function paging() {
 	<input type='hidden' name='list_key' id='list_key' value=''>
 </form>
 <div class='div_80'>
-	<input type='button' class='edit_button' id='delete' value='삭제' style='margin-bottom: 5px;'>
-	<input type='button' class='edit_button' id='priority' value='우선순위 설정' style='margin-bottom: 5px;margin-right: 10px;'>
-	<input type='button' class='edit_button' id='back' value='뒤로' style='margin-bottom: 5px;margin-right: 10px;'>
+	<input type='button' class='edit_button' id='back' value='뒤로' style='margin-bottom: 5px;'>
 	<table class='list_table'>
 		<colgroup>
-			<col width='10%'/>
-			<col width='10%'/>
-			<col width='50%'/>
+			<col width='5%'/>
+			<col width='75%'/>
 			<col width='20%'/>
-			<col width='10%'/>
 		</colgroup>
 		<thead>
 			<tr>
-				<th></th>
 				<th>우선순위</th>
 				<th>제목</th>
 				<th>마감기한</th>
-				<th>완료여부</th>
 			</tr>
 		</thead>
 		<tbody id='list_tbody'>

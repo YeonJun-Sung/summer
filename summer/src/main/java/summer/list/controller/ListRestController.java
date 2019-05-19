@@ -27,8 +27,10 @@ public class ListRestController {
 	@RequestMapping(value = "/listREST/getList.do", method = RequestMethod.GET)
 	public ResponseEntity<List<Map<String, Object>>> getList(HttpServletRequest req, HttpSession session) throws Exception {
 		String offset = req.getParameter("offset");
+		String check = req.getParameter("check");
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("offset", offset);
+		param.put("check", check);
 		try {
 			List<Map<String, Object>> list = listRestService.getList(param);
 			
@@ -41,8 +43,11 @@ public class ListRestController {
 	
 	@RequestMapping(value = "/listREST/getListSize.do", method = RequestMethod.GET)
 	public ResponseEntity<Integer> getListSize(HttpServletRequest req, HttpSession session) throws Exception {
+		String check = req.getParameter("check");
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("check", check);
 		try {
-			int list_size = listRestService.getListSize();
+			int list_size = listRestService.getListSize(param);
 			
 			return new ResponseEntity<Integer>(list_size, HttpStatus.OK);
 		}
@@ -87,6 +92,46 @@ public class ListRestController {
 			}
 			
 			listRestService.deleteTodo(list);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value = "/listREST/setPriority.do", method = RequestMethod.POST)
+	public void setPriority(HttpServletRequest req, HttpSession session) throws Exception {
+		try {
+			String priority = req.getParameter("priority");
+			String list_key = req.getParameter("list_key");
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("priority", priority);
+			param.put("list_key", list_key);
+			String pre_priority = listRestService.getPriority(param);
+
+			param.put("pre_priority", pre_priority);
+			listRestService.setPriority(param);
+			
+			param.put("status", 1);
+			listRestService.updateStatus(param);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value = "/listREST/removePriority.do", method = RequestMethod.POST)
+	public void removePriority(HttpServletRequest req, HttpSession session) throws Exception {
+		try {
+			String list_key = req.getParameter("list_key");
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("list_key", list_key);
+			String priority = listRestService.getPriority(param);
+			
+			param.put("priority", priority);
+			listRestService.removePriority(param);
+			
+			param.put("status", 2);
+			listRestService.updateStatus(param);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
