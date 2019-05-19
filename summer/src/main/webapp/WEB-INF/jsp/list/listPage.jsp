@@ -99,6 +99,13 @@ function listRefresh(){
 		, success : function(data) {
 			console.log(data);
 			var rtvHtml = "";
+			
+			if(data.length == 0) {
+				offset = offset - 10
+				listRefresh()
+				return;
+			}
+			
 			for(var i = 0;i < data.length;i++) {
 				var temp = data[i];
 				
@@ -148,7 +155,7 @@ function getListSize() {
 		, success : function(data) {
 			console.log(data);
 			list_size = data;
-			page_size = list_size / 10;
+			page_size = Math.ceil(list_size / 10);
 			paging();
 		}
 	    , error : function(e) {
@@ -159,9 +166,15 @@ function getListSize() {
 
 function paging() {
 	var rtvHtml = "<input type='button' id='pre_bt' value='<' style='margin-right: 30px;'>";
-	for(var i = min;i < (min + 10 <= page_size?min + 10:page_size + 1);i++) {
+	for(var i = min;i < min + 10;i++) {
 		rtvHtml += "<span class='page' style='padding: 0px 10px;'>";
 		rtvHtml += "" + i;
+		rtvHtml += "</span>";
+		if(i == page_size)	break;
+	}
+	if(page_size == 0){
+		rtvHtml += "<span class='page' style='padding: 0px 10px;'>";
+		rtvHtml += "" + 1;
 		rtvHtml += "</span>";
 	}
 	rtvHtml += "<input type='button' id='next_bt' value='>' style='margin-left: 30px;'>";
