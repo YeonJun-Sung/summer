@@ -23,4 +23,10 @@ public class ListRestServiceImpl implements ListRestService {
 		return listRestDAO.getList(param);
 	}
 
+	@Override
+	public int getListSize() throws Exception {
+		// TODO Auto-generated method stub
+		return listRestDAO.getListSize();
+	}
+
 }

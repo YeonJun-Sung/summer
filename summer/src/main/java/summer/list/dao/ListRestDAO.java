@@ -16,4 +16,9 @@ public class ListRestDAO extends AbstractDAO {
 		return (List<Map<String, Object>>) selectList("listRest.getList", param);
 	}
 
+	public int getListSize() {
+		// TODO Auto-generated method stub
+		return (int) selectOne("listRest.getListSize", "");
+	}
+
 }

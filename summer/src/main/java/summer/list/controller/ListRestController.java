@@ -24,13 +24,30 @@ public class ListRestController {
 	@Resource(name = "listRestService")
 	private ListRestService listRestService;
 	
-	@RequestMapping(value = "/listREST/getList.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/listREST/getList.do", method = RequestMethod.GET)
 	public ResponseEntity<List<Map<String, Object>>> getList(HttpServletRequest req, HttpSession session) throws Exception {
 		String offset = req.getParameter("offset");
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("offset", offset);
-		List<Map<String, Object>> list = listRestService.getList(param);
-		
-		return new ResponseEntity<List<Map<String, Object>>>(list, HttpStatus.OK);
+		try {
+			List<Map<String, Object>> list = listRestService.getList(param);
+			
+			return new ResponseEntity<List<Map<String, Object>>>(list, HttpStatus.OK);
+		}
+		catch (Exception e) {
+			return new ResponseEntity<List<Map<String, Object>>>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@RequestMapping(value = "/listREST/getListSize.do", method = RequestMethod.GET)
+	public ResponseEntity<Integer> getListSize(HttpServletRequest req, HttpSession session) throws Exception {
+		try {
+			int list_size = listRestService.getListSize();
+			
+			return new ResponseEntity<Integer>(list_size, HttpStatus.OK);
+		}
+		catch (Exception e) {
+			return new ResponseEntity<Integer>(HttpStatus.BAD_REQUEST);
+		}
 	}
 }

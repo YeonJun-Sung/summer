@@ -10,13 +10,43 @@
 <body>
 <script type="text/javascript">
 
+var min = 1;
+var list_size = 0;
+var page_size = 0;
+var offset = 0;
+
 $(document).ready(function(){
-	list_refresh(0);
+	listRefresh();
+	getListSize();
+
+	$("body").on("click", "#pre_bt", function(){
+		if(min != 1){
+			console.log("pre");
+			min = min - 10;
+			paging();
+		}
+	});
+	
+	$("body").on("click", "#next_bt", function(){
+		if(min + 10 <= page_size){
+			console.log("next");
+			min = min + 10;
+			paging();
+		}
+	});
+	
+	$("body").on("click", ".page", function(){
+		var page = $(this).text();
+		if(offset != (page - 1) * 10) {
+			offset = (page - 1) * 10;
+			listRefresh();
+		}
+	})
 });
 
-function list_refresh(offset){
+function listRefresh(){
 	$.ajax({
-		type : "POST"
+		type : "GET"
 		, url : "/summer/listREST/getList.do"
 		, data : {
 			offset : offset
@@ -27,7 +57,7 @@ function list_refresh(offset){
 			for(var i = 0;i < data.length;i++) {
 				var temp = data[i];
 				
-				rtvHtml += "<tr>";
+				rtvHtml += "<tr style='height: 49px;'>";
 				rtvHtml += "<td style='text-align: center;'><input type='checkbox'></td>";
 				rtvHtml += "<td style='text-align: center;'>";
 				if(temp.list_stat == 1)
@@ -47,6 +77,12 @@ function list_refresh(offset){
 					rtvHtml += "-</td>";
 				rtvHtml += "</tr>";
 			}
+			
+			for(var i = 0;i < 10 - data.length;i++) {
+				rtvHtml += "<tr style='height: 49px;'>";
+				rtvHtml += "<td colspan='5'></td>";
+				rtvHtml += "</tr>";
+			}
 
 			$("#list_tbody").empty();
 			$("#list_tbody").prepend(rtvHtml);
@@ -55,6 +91,37 @@ function list_refresh(offset){
 	    	console.log(e.result);
 	    }
 	});
+}
+
+function getListSize() {
+	$.ajax({
+		type : "GET"
+		, url : "/summer/listREST/getListSize.do"
+		, data : {}
+		, success : function(data) {
+			console.log(data);
+			list_size = data;
+			page_size = list_size / 10;
+			paging();
+		}
+	    , error : function(e) {
+	    	console.log(e.result);
+	    }
+	});
+}
+
+function paging() {
+	var rtvHtml = "<input type='button' id='pre_bt' value='<' style='margin-right: 30px;'>";
+	for(var i = min;i < (min + 10 <= page_size?min + 10:page_size + 1);i++) {
+		rtvHtml += "<span class='page' style='padding: 0px 10px;'>";
+		rtvHtml += "" + i;
+		rtvHtml += "</span>";
+	}
+	rtvHtml += "<input type='button' id='next_bt' value='>' style='margin-left: 30px;'>";
+	
+	$(".paging_div").empty();
+	$(".paging_div").append(rtvHtml);
+	
 }
 
 </script>
@@ -82,6 +149,7 @@ function list_refresh(offset){
 			</tr>
 		</tbody>
 	</table>
+	<div class='paging_div' style='text-align: center; padding-top:25px;'></div>
 </div>
 </body>
 </html>

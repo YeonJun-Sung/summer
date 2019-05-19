@@ -9,4 +9,5 @@ import org.springframework.stereotype.Service;
 public interface ListRestService {
 
 	List<Map<String, Object>> getList(Map<String, Object> param) throws Exception;
+	int getListSize() throws Exception;
 }

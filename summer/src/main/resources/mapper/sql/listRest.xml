@@ -14,4 +14,9 @@
 		limit 10
 		offset ${offset};
 	</select>
+	
+	<select id="getListSize" resultType="Integer">
+		SELECT count(*)
+		FROM list_contents
+	</select>
 </mapper>
