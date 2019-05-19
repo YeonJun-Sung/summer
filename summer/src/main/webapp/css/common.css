@@ -28,22 +28,23 @@ table {
 }
 
 .subject {
-    width: 80%;
+    width: 100%;
     height: 30px;
-    margin: 10px 0px;
+    border: none;
 }
 
 .date {
-    width: 15%;
+    width: 100%;
     height: 30px;
-    margin: 10px 0px;
-    float: right;
+    border: none;
+    text-align: center;
 }
 
 .contents {
 	width: 100%;
-    margin: 10px 0px;
     height: 500px;
+    padding: 0px;
+    border: none;
 }
 
 .edit_button {
@@ -61,5 +62,14 @@ table {
 }
 
 .list_table tr th {
+	border: 1px solid black;
+}
+
+.detail_table {
+	width: 100%;
+	margin-bottom: 30px;
+}
+
+.detail_table tr td {
 	border: 1px solid black;
 }

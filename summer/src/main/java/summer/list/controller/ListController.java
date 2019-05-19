@@ -1,5 +1,6 @@
 package summer.list.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import summer.list.service.ListService;
@@ -26,5 +28,22 @@ public class ListController {
 	public ModelAndView listPage(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		ModelAndView mv = new ModelAndView("list/listPage");
 		return mv;
+	}
+	
+ 	@RequestMapping(value = "/list/detailTodo.do")
+	public ModelAndView detailTodo(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		ModelAndView mv = new ModelAndView("list/detailTodo");
+		String list_key = req.getParameter("list_key");
+		try {
+			Map<String, Object> param = listService.getTodoDetail(list_key);
+			mv.addObject("todo", param);
+			
+			return mv;			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			mv = new ModelAndView("main/mainPage");
+			return mv;
+		}
 	}
 }

@@ -13,7 +13,6 @@
 $(document).ready(function(){
 	$("#cancel").on("click", function(){
 		var form = $("#send_form");
-		form.attr('method', "POST");
 		form.attr('action', "/summer/main/mainPage.do");
 		form.submit();
 	});
@@ -46,7 +45,6 @@ $(document).ready(function(){
 				}
 				, success : function(data) {
 					var form = $("#send_form");
-					form.attr('method', "POST");
 					form.attr('action', "/summer/main/mainPage.do");
 					form.submit();
 				}
@@ -101,25 +99,9 @@ function dateValidation(date) {
 </script>
 <form id="send_form"></form>
 <div class='div_80'>
-	<table class='detail_table'>
-		<colgroup>
-			<col width='80%'/>
-			<col width='20%'/>
-		</colgroup>
-		<tr style='height:30px;'>
-			<td id='detail_subject'>
-				<input type='text' class='subject' id='create_subject' placeholder='제목을 입력하세요.'>
-			</td>
-			<td id='detail_date' style='text-align:center;'>
-				<input type='text' class='date' id='create_date' placeholder='YYYY-MM-DD'>
-			</td>
-		</tr>
-		<tr style='height:500px; vertical-align: top;'>
-			<td id='detail_contents' colspan='2'>
-				<textarea type='text' class='contents' id='create_contents' placeholder='내용을 입력하세요.'></textarea>
-			</td>
-		</tr>
-	</table>
+	<input type='text' class='subject' id='create_subject' placeholder='제목을 입력하세요.'>
+	<input type='text' class='date' id='create_date' placeholder='YYYY-MM-DD'>
+	<textarea type='text' class='contents' id='create_contents' placeholder='내용을 입력하세요.'></textarea>
 	<input type='button' class='edit_button' id='cancel' value='취소'>
 	<input type='button' class='edit_button' id='create' value='생성' style='margin-right: 15px;'>
 </div>

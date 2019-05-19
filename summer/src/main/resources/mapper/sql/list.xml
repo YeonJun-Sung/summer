@@ -2,4 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="list">
+	<select id="getTodoDetail" parameterType="hashmap" resultType="hashmap">
+		SELECT *
+		FROM list_contents a
+			LEFT OUTER JOIN list_priority b
+			on a.list_key = b.list_key
+			LEFT OUTER JOIN list_status c
+			on a.list_key = c.list_key
+		WHERE
+			a.list_key = #{list_key}
+	</select>
+
 </mapper>

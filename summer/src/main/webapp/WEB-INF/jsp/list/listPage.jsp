@@ -136,7 +136,7 @@ function paging() {
 
 </script>
 <form id='send_form'>
-	<input type='hidden' id='list_key' value=''>
+	<input type='hidden' name='list_key' id='list_key' value=''>
 </form>
 <div class='div_80'>
 	<table class='list_table'>
