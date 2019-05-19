@@ -139,49 +139,49 @@ use summer_coding;
   
 list_contents table 생성  
 ``` MySQL
-CREATE TABLE `list_contents` (  
-	`list_key` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',  
-	`list_title` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',  
-	`list_content` TEXT NOT NULL COLLATE 'utf8_unicode_ci',  
-	`seq` INT(11) NOT NULL AUTO_INCREMENT,  
-	PRIMARY KEY (`list_key`),  
-	INDEX `seq` (`seq`)  
-)  
-COMMENT='contain TODO list title and contents'  
-COLLATE='utf8_unicode_ci'  
-ENGINE=InnoDB  
-ROW_FORMAT=DYNAMIC  
-AUTO_INCREMENT=0  
-;  
+CREATE TABLE `list_contents` (
+	`list_key` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`list_subject` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`list_content` TEXT NOT NULL COLLATE 'utf8_unicode_ci',
+	`seq` INT(11) NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY (`list_key`),
+	INDEX `seq` (`seq`)
+)
+COMMENT='contain TODO list title and contents'
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB
+ROW_FORMAT=DYNAMIC
+AUTO_INCREMENT=144
+;
 ``` 
 
 list_priority table 생성  
 ``` MySQL
-CREATE TABLE `list_priority` (  
-	`list_key` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',  
-	`list_pri` INT(11) NULL DEFAULT NULL,  
-	UNIQUE INDEX `list_key` (`list_key`),  
-	CONSTRAINT `FK_list_priority_list_contents` FOREIGN KEY (`list_key`) REFERENCES `list_contents` (`list_key`)  
-)  
-COMMENT='contain TODO list priority'  
-COLLATE='utf8_unicode_ci'  
-ENGINE=InnoDB  
-ROW_FORMAT=DYNAMIC  
-;  
+CREATE TABLE `list_priority` (
+	`list_key` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`list_pri` INT(11) NULL DEFAULT NULL,
+	UNIQUE INDEX `list_key` (`list_key`),
+	CONSTRAINT `FK_list_priority_list_contents` FOREIGN KEY (`list_key`) REFERENCES `list_contents` (`list_key`)
+)
+COMMENT='contain TODO list priority'
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB
+ROW_FORMAT=DYNAMIC
+;
 ``` 
 
 list_status table 생성  
 ``` MySQL
-CREATE TABLE `list_status` (  
-	`list_key` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',  
-	`list_date` DATE NULL DEFAULT NULL,  
+CREATE TABLE `list_status` (
+	`list_key` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`list_date` DATE NULL DEFAULT NULL,
 	`list_stat` VARCHAR(50) NULL DEFAULT NULL COMMENT '-1-알람완료 / 0-기간만료 / 1-우선순위 O / 2-우선순위 X / 3-완료 ' COLLATE 'utf8_unicode_ci',
-	UNIQUE INDEX `list_key` (`list_key`),  
-	CONSTRAINT `FK_list_status_list_contents` FOREIGN KEY (`list_key`) REFERENCES `list_contents` (`list_key`)  
-)  
-COMMENT='contain TODO list deadline and status'  
-COLLATE='utf8_unicode_ci'  
-ENGINE=InnoDB  
-ROW_FORMAT=DYNAMIC  
-;  
+	UNIQUE INDEX `list_key` (`list_key`),
+	CONSTRAINT `FK_list_status_list_contents` FOREIGN KEY (`list_key`) REFERENCES `list_contents` (`list_key`)
+)
+COMMENT='contain TODO list deadline and status'
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB
+ROW_FORMAT=DYNAMIC
+;
  ```
