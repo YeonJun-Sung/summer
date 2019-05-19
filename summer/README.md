@@ -131,7 +131,7 @@ chown -R tomcat8:tomcat8 /var/lib/tomcat8/webapps
 mysql -uroot -p  
 ```   
   
-todo_list database 생성  
+summer_coding database 생성  
 ``` MySQL
 use summer_coding;  
 ``` 
