@@ -118,7 +118,7 @@ function dateValidation(date) {
 		</tr>
 		<tr style='height:500px; vertical-align: top;'>
 			<td id='detail_contents' colspan='2'>
-				<textarea type='text' class='contents' id='create_contents' placeholder='내용을 입력하세요.'></textarea>
+				<textarea class='contents' id='create_contents' placeholder='내용을 입력하세요.'></textarea>
 			</td>
 		</tr>
 	</table>

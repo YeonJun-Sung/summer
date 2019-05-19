@@ -19,7 +19,8 @@ public class CreateRestServiceImpl implements CreateRestService {
 	@Override
 	public void saveTodo(Map<String, Object> param) throws Exception {
 		// TODO Auto-generated method stub
-		String key = createRestDAO.saveTodo(param);
+		String list_key = createRestDAO.saveTodo(param);
+		param.put("list_key", list_key);
 		createRestDAO.saveTodoPriority(param);
 		createRestDAO.saveTodoStatus(param);
 	}

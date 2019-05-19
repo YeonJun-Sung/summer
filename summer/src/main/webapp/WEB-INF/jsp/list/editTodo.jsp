@@ -130,7 +130,7 @@ function replaceAll(str, search, replace) {
 		<tr style='height:500px; vertical-align: top;'>
 			<td style='text-align: center;vertical-align: middle;'>내용</td>
 			<td id='detail_contents' colspan='2'>
-				<textarea type='text' class='contents' id='edit_contents' placeholder='내용을 입력하세요.'>${todo.list_content }</textarea>
+				<textarea class='contents' id='edit_contents' placeholder='내용을 입력하세요.'>${todo.list_content }</textarea>
 			</td>
 		</tr>
 	</table>
