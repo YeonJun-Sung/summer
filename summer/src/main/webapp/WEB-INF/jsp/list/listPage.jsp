@@ -52,6 +52,41 @@ $(document).ready(function(){
 		form.attr('action', "/summer/list/detailTodo.do");
 		form.submit();
 	});
+	
+	$("#back").on("click", function(){
+		var form = $("#send_form");
+		form.attr('action', "/summer/main/mainPage.do");
+		form.submit();
+	});
+	
+	$("#delete").on("click", function(){
+		var subject = 0;
+		var list_key = "";
+		$(".list_check").each(function(){
+			if($(this).is(":checked")){
+				list_key += $(this).data("key") + "/";
+				subject = subject + 1;
+			}
+		});
+		var check = confirm("TODO " + subject + "개를 삭제하시겠습니까?");
+		
+		if(check) {
+			$.ajax({
+				type : "POST"
+				, url : "/summer/listREST/deleteTodo.do"
+				, data : {
+					list_key : list_key
+				}
+				, success : function(data) {
+					listRefresh();
+					getListSize();
+				}
+			    , error : function(e) {
+			    	console.log(e.result);
+			    }
+			});
+		}
+	});
 });
 
 function listRefresh(){
@@ -68,7 +103,9 @@ function listRefresh(){
 				var temp = data[i];
 				
 				rtvHtml += "<tr style='height: 49px;'>";
-				rtvHtml += "<td style='text-align: center;'><input type='checkbox'></td>";
+				rtvHtml += "<td style='text-align: center;'>";
+				rtvHtml += "<input type='checkbox' class='list_check' data-key='" + temp.list_key + "' data-subject='" + temp.list_subject + "'>";
+				rtvHtml += "</td>";
 				rtvHtml += "<td style='text-align: center;'>";
 				if(temp.list_stat == 1)
 					rtvHtml += "" + temp.list_pri + "</td>";
@@ -139,6 +176,8 @@ function paging() {
 	<input type='hidden' name='list_key' id='list_key' value=''>
 </form>
 <div class='div_80'>
+	<input type='button' class='edit_button' id='delete' value='삭제' style='margin-bottom: 5px;'>
+	<input type='button' class='edit_button' id='back' value='뒤로' style='margin-bottom: 5px;margin-right: 10px;'>
 	<table class='list_table'>
 		<colgroup>
 			<col width='10%'/>

@@ -38,4 +38,11 @@ public class ListRestServiceImpl implements ListRestService {
 			listRestDAO.editTodoDate(param);
 	}
 
+	@Override
+	public void deleteTodo(List<Map<String, Object>> list) throws Exception {
+		// TODO Auto-generated method stub
+		listRestDAO.deleteTodoPriority(list);
+		listRestDAO.deleteTodoStatus(list);
+		listRestDAO.deleteTodo(list);
+	}
 }

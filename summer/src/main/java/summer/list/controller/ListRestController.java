@@ -71,4 +71,25 @@ public class ListRestController {
 			e.printStackTrace();
 		}
 	}
+	
+	@RequestMapping(value = "/listREST/deleteTodo.do", method = RequestMethod.POST)
+	public void deleteTodo(HttpServletRequest req, HttpSession session) throws Exception {
+		try {
+			String list_key = req.getParameter("list_key");
+			String[] key_arr = list_key.split("/");
+			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+			for(int i = 0;i < key_arr.length;i++) {
+				if(key_arr[i] != null && !key_arr[i].equals("")) {
+					Map<String, Object> param = new HashMap<String, Object>();
+					param.put("list_key", key_arr[i]);
+					list.add(param);
+				}
+			}
+			
+			listRestService.deleteTodo(list);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

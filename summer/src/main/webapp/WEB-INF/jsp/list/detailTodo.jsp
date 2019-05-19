@@ -26,6 +26,30 @@ $(document).ready(function(){
 		form.attr('action', "/summer/list/editTodo.do");
 		form.submit();
 	});
+	
+	$("#delete").on("click", function(){
+		var subject = $("#detail_subject").text();
+		var check = confirm("'" + subject + "'를 삭제하시겠습니까?");
+		
+		if(check) {
+			var list_key = $("#list_key").val();
+			$.ajax({
+				type : "POST"
+				, url : "/summer/listREST/deleteTodo.do"
+				, data : {
+					list_key : list_key
+				}
+				, success : function(data) {
+					var form = $("#send_form");
+					form.attr('action', "/summer/list/listPage.do");
+					form.submit();
+				}
+			    , error : function(e) {
+			    	console.log(e.result);
+			    }
+			});
+		}
+	});
 });
 
 
@@ -34,6 +58,7 @@ $(document).ready(function(){
 	<input type='hidden' name='list_key' id='list_key' value='${todo.list_key }'>
 </form>
 <div class='div_80'>
+	<input type='button' class='edit_button' id='delete' value='삭제' style='margin-bottom: 5px;'>
 	<table class='detail_table'>
 		<colgroup>
 			<col width='10%'/>

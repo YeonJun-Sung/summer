@@ -34,4 +34,22 @@
 			list_date = #{date}
 		WHERE list_key = #{list_key}
 	</update>
+	
+	<delete id="deleteTodo" parameterType="hashmap">
+		<foreach collection="list" item="up" separator=";">
+		DELETE FROM list_contents WHERE list_key = #{up.list_key}
+		</foreach>
+	</delete>
+	
+	<delete id="deleteTodoPriority" parameterType="hashmap">
+		<foreach collection="list" item="up" separator=";">
+		DELETE FROM list_priority WHERE list_key = #{up.list_key}
+		</foreach>
+	</delete>
+	
+	<delete id="deleteTodoStatus" parameterType="hashmap">
+		<foreach collection="list" item="up" separator=";">
+		DELETE FROM list_status WHERE list_key = #{up.list_key}
+		</foreach>
+	</delete>
 </mapper>

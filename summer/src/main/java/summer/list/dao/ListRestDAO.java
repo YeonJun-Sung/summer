@@ -31,4 +31,19 @@ public class ListRestDAO extends AbstractDAO {
 		update("listRest.editTodoDate", param);
 	}
 
+	public void deleteTodo(List<Map<String, Object>> list) {
+		// TODO Auto-generated method stub
+		delete("listRest.deleteTodo", list);
+	}
+
+	public void deleteTodoPriority(List<Map<String, Object>> list) {
+		// TODO Auto-generated method stub
+		delete("listRest.deleteTodoPriority", list);
+	}
+
+	public void deleteTodoStatus(List<Map<String, Object>> list) {
+		// TODO Auto-generated method stub
+		delete("listRest.deleteTodoStatus", list);
+	}
+
 }
